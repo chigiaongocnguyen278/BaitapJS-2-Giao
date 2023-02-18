@@ -168,7 +168,7 @@ function tinhTienThue (){
     var tienDongThue = thuNhapNam - KHONG_DONG_THUE - nguoiPhuThuoc* TIEN_NGUOI_PHU_THUOC
     var tienThue = 0
 
-    if (tienDongThue<= 60e+6){
+    if (tienDongThue > 0 && tienDongThue<= 60e+6){
         tienThue = tienDongThue*THUE_60_DAU
     } else if ( tienDongThue > 60e+6 && tienDongThue <=120e+6){
         tienThue = tienDongThue* THUE_60_120
@@ -182,6 +182,9 @@ function tinhTienThue (){
         tienThue = tienDongThue* THUE_624_960
     } else if (tienDongThue > 960e+6 ){
         tienThue = tienDongThue* THUE_TREN_960
+    } else {
+        alert ( 'Tiền đóng thuế không hợp lệ. Vui lòng nhập lại')
+        document.getElementById("txtTienThue").innerHTML =  " Họ tên: " + hoTen +" ; Tiền thuế thu nhập cá nhân : 0 VND "
     }
 
 
@@ -220,18 +223,20 @@ document.getElementById("btnTienThue").onclick= tinhTienThue;
 
 
 // hàm chọn loại khách hàng
-var loaiKhachHang =" "
+
+ var loaiKhachHang =" "
 
 function chonLoaiKhachHang() {
     loaiKhachHang = document.getElementById("LoaiKhachHang").value;
-    if ( loaiKhachHang == 'DN'){
+    if ( loaiKhachHang == "DN"){
     document.getElementById("SoKetNoi").style.display="block"
-} else if ( loaiKhachHang == 'ND'){
+} else {
     document.getElementById("SoKetNoi").style.display="none"
- } else (
-    alert ('Hãy chọn loại khách hàng')
-)
+ } 
+   
 }
+
+
 // hàm tính tiền cáp
 function tinhPhiCap( phiHoaDon, phiDichVu, phiKenhCaoCap, soKenh){
     return ( phiHoaDon + phiDichVu + phiKenhCaoCap*soKenh)
@@ -254,16 +259,21 @@ function tinhTienCap(){
     var soKetNoi =document.getElementById("SoKetNoi").value;
 
     var tienCap = 0
+
+
     switch (loaiKhachHang){
+        default :
+            alert ('Hãy chọn loại khách hàng')
+            break;
         case "ND" :
-            console.log(loaiKhachHang);
             tienCap = tinhPhiCap(HOA_DON_NHA_DAN,DICH_VU_NHA_DAN,KENH_CAO_CAP_NHA_DAN,soKenhCaoCap);
             break;
-       case "DN"  :
+        case "DN"  :
         if (soKetNoi >=0 && soKetNoi <=10) {
             tienCap = tinhPhiCap(HOA_DON_DOANH_NGHIEP,DICH_VU_DOANH_NGHIEP_10_KENH_DAU, THUE_KENH_CAO_CAP,soKenhCaoCap )
         } else if ( soKetNoi > 10 ) {
             tienCap = tinhPhiCap(HOA_DON_DOANH_NGHIEP,DICH_VU_DOANH_NGHIEP_10_KENH_DAU, THUE_KENH_CAO_CAP,soKenhCaoCap ) + ((soKetNoi-10)*DICH_VU_DOANH_NGHIEP_5_KENH_THEM)
+            break;
         } else {
             alert ('Vui lòng nhập số kết nối')
         }
@@ -273,4 +283,5 @@ function tinhTienCap(){
 document.getElementById("txtTienCap").innerHTML = " Mã khách hàng : " + maKhachHang + " ; Tiền cáp : " +  new Intl.NumberFormat('en-US',{ style: "currency", currency: "USD",  maximumFractionDigits: 2 }).format(tienCap);
     
 }
+
 document.getElementById("btnTienCap").onclick= tinhTienCap;
