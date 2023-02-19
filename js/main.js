@@ -8,7 +8,7 @@
  *      + tạo hàm tính kết quả
  *      + gán hàm vào sự kiện click của button 
         B2: trong hàm, lập công thức tính toán và kiểm tra đk  
-        *      Nếu diem 1 trong 3 môn = 0 => Rớt, không cần tính tổng điểm
+        *      Nếu điểm 1 trong 3 môn = 0 => Rớt, không cần tính tổng điểm
         *      Ngược lại nếu không có môn nào = 0 , tính điểm tổng kết
         *             nếu điểm tổng kết >= điểm chuẩn => đậu
         *             ngược lại nếu điểm tổng kết < điểm chuẩn => rớt
@@ -47,13 +47,12 @@ function tinhKetQua(){
 
     var mon3 = Number ( document.getElementById("DiemMon3").value);
 
-    var diemTongKet= tinhTongDiem (diemKV, diemDT, mon1,mon2, mon3)
+    var diemTongKet= tinhTongDiem (diemKV, diemDT, mon1,mon2, mon3);
 
 
-    
     if (kiemTraDiem(mon1) == false || kiemTraDiem(mon2) == false || kiemTraDiem(mon3) == false) {
 
-        document.getElementById("txtKetQua").innerHTML= "Bạn đã rớt. Do có điểm nhỏ hơn hoặc bằng 0"
+        document.getElementById("txtKetQua").innerHTML= "Bạn đã rớt. Do có điểm nhỏ hơn hoặc bằng 0";
     
     
     } else if (diemTongKet>= diemChuan) {
@@ -65,10 +64,8 @@ function tinhKetQua(){
       
     } 
     
-  
-
 }
-document.getElementById("btnKetQua").onclick= tinhKetQua;
+        document.getElementById("btnKetQua").onclick= tinhKetQua;
 
 /**
  * ?Bài tập 2
@@ -99,28 +96,26 @@ const GIA_KW_CON_LAi = 1300
 
 
 function tinhTienKW () {
-    var hoTen =  document.getElementById("HoTen").value
-    var soKW =  document.getElementById("SoKW").value
-    var total = 0
+    var hoTen =  document.getElementById("HoTen").value;
+    var soKW =  document.getElementById("SoKW").value;
+    var total = 0;
      if (0 <soKW && soKW <= 50){
         total= soKW * GIA_KW_DAU
      } else if ( soKW >50 && soKW <= 100){
-     total= 50*GIA_KW_DAU + (soKW -50)*GIA_KW_50_KE
+         total= 50*GIA_KW_DAU + (soKW -50)*GIA_KW_50_KE
     }else if ( soKW > 100 && soKW <= 200) {
-        total= 50*GIA_KW_DAU + 50*GIA_KW_50_KE + (soKW -100)*GIA_KW_100_KE
+         total= 50*GIA_KW_DAU + 50*GIA_KW_50_KE + (soKW -100)*GIA_KW_100_KE
     } else if ( soKW > 200 && soKW <= 350) {
-        total= 50*GIA_KW_DAU + 50*GIA_KW_50_KE + 100*GIA_KW_100_KE +(soKW -200)*GIA_KW_150_KE
+         total= 50*GIA_KW_DAU + 50*GIA_KW_50_KE + 100*GIA_KW_100_KE +(soKW -200)*GIA_KW_150_KE
     } else if ( soKW >350){
-        total= 50*GIA_KW_DAU + 50*GIA_KW_50_KE + 100*GIA_KW_100_KE + 150*GIA_KW_150_KE+(soKW -350)* GIA_KW_CON_LAi 
+         total= 50*GIA_KW_DAU + 50*GIA_KW_50_KE + 100*GIA_KW_100_KE + 150*GIA_KW_150_KE+(soKW -350)* GIA_KW_CON_LAi 
     } else {
-        alert (" số KW không hợp lệ. Vui lòng nhập lại")
+        alert (" số KW không hợp lệ ! Vui lòng nhập lại");
     }
     document.getElementById("txtTienDien").innerHTML = " Họ tên: " + hoTen + " ; Tiền điện : " + total.toLocaleString();
     
-
-
 }
-document.getElementById("btnTienDien").onclick= tinhTienKW;
+        document.getElementById("btnTienDien").onclick= tinhTienKW;
 
 
 
@@ -130,12 +125,13 @@ document.getElementById("btnTienDien").onclick= tinhTienKW;
    Khối 1: Lấy dữ liệu input
             Nhập họ tên, tổng thu nhập năm, số người phụ thuộc
  * Khối 2: 
-            B1: lấy giá trị từ form khi user click
- *      + tạo hàm tính tiền thuế
- *      + gán hàm vào sự kiện click của button 
- *          B2 : trong hàm, lập công thức tính toán và kiểm tra đk  
+        B1: lấy giá trị từ form khi user click
+ *          + tạo hàm tính tiền thuế
+ *          + gán hàm vào sự kiện click của button 
+ *      B2 : trong hàm, lập công thức tính toán và kiểm tra đk  
  *               Thu nhập chịu thuế = Tổng thu nhập năm - 4tr- Số người phụ thuộc * 1.6tr
- *           nếu Thu nhập chịu thuế 
+ * 
+ *              nếu Thu nhập chịu thuế 
  *                 từ 0 đến 60tr     : tiền thuế = Thu nhập chịu thuế * 0.05
  *                 từ 60tr đến 120tr : tiền thuế = Thu nhập chịu thuế * 0.1
  *                 từ 120tr đến 210tr :tiền thuế = Thu nhập chịu thuế * 0.15
@@ -162,11 +158,15 @@ const THUE_TREN_960 = 0.35
 
 
 function tinhTienThue (){
-    var hoTen =  document.getElementById("HoVaTen").value
-    var thuNhapNam = document.getElementById("ThuNhapNam").value
-    var nguoiPhuThuoc = document.getElementById("NguoiPhuThuoc").value
-    var tienDongThue = thuNhapNam - KHONG_DONG_THUE - nguoiPhuThuoc* TIEN_NGUOI_PHU_THUOC
-    var tienThue = 0
+    var hoTen =  document.getElementById("HoVaTen").value;
+
+    var thuNhapNam = document.getElementById("ThuNhapNam").value;
+
+    var nguoiPhuThuoc = document.getElementById("NguoiPhuThuoc").value;
+
+    var tienDongThue = thuNhapNam - KHONG_DONG_THUE - nguoiPhuThuoc* TIEN_NGUOI_PHU_THUOC;
+
+    var tienThue = 0;
 
     if (tienDongThue > 0 && tienDongThue<= 60e+6){
         tienThue = tienDongThue*THUE_60_DAU
@@ -183,15 +183,16 @@ function tinhTienThue (){
     } else if (tienDongThue > 960e+6 ){
         tienThue = tienDongThue* THUE_TREN_960
     } else {
-        alert ( 'Tiền đóng thuế không hợp lệ. Vui lòng nhập lại')
-        document.getElementById("txtTienThue").innerHTML =  " Họ tên: " + hoTen +" ; Tiền thuế thu nhập cá nhân : 0 VND "
+        alert ( 'Tiền đóng thuế không hợp lệ ! Vui lòng nhập lại');
+
+        document.getElementById("txtTienThue").innerHTML =  " Họ tên: " + hoTen +" ; Tiền thuế thu nhập cá nhân : 0 VND ";
     }
 
 
-document.getElementById("txtTienThue").innerHTML = " Họ tên: " + hoTen + " ; Tiền thuế thu nhập cá nhân : " + tienThue.toLocaleString() + " VND"
+document.getElementById("txtTienThue").innerHTML = " Họ tên: " + hoTen + " ; Tiền thuế thu nhập cá nhân : " + tienThue.toLocaleString() + " VND";
 
 }
-document.getElementById("btnTienThue").onclick= tinhTienThue;
+            document.getElementById("btnTienThue").onclick= tinhTienThue;
 
 
 /**
@@ -202,20 +203,21 @@ document.getElementById("btnTienThue").onclick= tinhTienThue;
             Nhập mã khách hàng
             Nhập số kết nối, số kênh cao cấp
  * Khối 2: lập công thức tính toán và kiểm tra đk
-         B1 : tạo hàm chọn loại khách hàng, gắn sự kiện onchange. Nếu khách hàng là doanh nghiệp thì nhập thêm số kế nối
+         B1 : tạo hàm chọn loại khách hàng, gắn sự kiện onchange. 
+              Nếu khách hàng là doanh nghiệp thì nhập thêm số kế nối
          B2: lấy giá trị từ form khi user click
- *      + tạo hàm tính tiền cáp
- *      + gán hàm vào sự kiện click của button    
+ *              + tạo hàm tính tiền cáp
+ *              + gán hàm vào sự kiện click của button    
  *       B3: trong hàm
              3.1 Lấy giá trị từ form
              3.2 Tạo hàm so sánh, 
-             Nếu là nhà dân thì :
-             Tiền Cáp = • Phí xử lý hóa đơn + Phí dịch vụ cơ bản + Thuê kênh cao cấp* Số kênh
-             Nếu là doanh nghiệp thì :
-                 nếu số kết nối <=10 :
-             Tiền Cáp = • Phí xử lý hóa đơn + Phí dịch vụ cơ bản + Thuê kênh cao cấp* Số kênh
-                  nếu số kết nối > 10 :
-            Tiền Cáp = • Phí xử lý hóa đơn + Phí dịch vụ cơ bản + Thuê kênh cao cấp* Số kênh + (số kết nối -10)* phí kết nối thêm   
+                 Nếu là nhà dân thì :
+             Tiền Cáp = Phí xử lý hóa đơn + Phí dịch vụ cơ bản + Thuê kênh cao cấp* Số kênh
+                 Nếu là doanh nghiệp thì :
+                     nếu số kết nối <=10 :
+             Tiền Cáp = Phí xử lý hóa đơn + Phí dịch vụ cơ bản + Thuê kênh cao cấp* Số kênh
+                    nếu số kết nối > 10 :
+            Tiền Cáp =  Phí xử lý hóa đơn + Phí dịch vụ cơ bản + Thuê kênh cao cấp* Số kênh + (số kết nối -10)* phí kết nối thêm   
  *   
  * Khối 3: thông báo output
  *       
@@ -224,14 +226,18 @@ document.getElementById("btnTienThue").onclick= tinhTienThue;
 
 // hàm chọn loại khách hàng
 
- var loaiKhachHang =" "
+ var loaiKhachHang =" ";
 
 function chonLoaiKhachHang() {
     loaiKhachHang = document.getElementById("LoaiKhachHang").value;
+
     if ( loaiKhachHang == "DN"){
-    document.getElementById("SoKetNoi").style.display="block"
+
+    document.getElementById("SoKetNoi").style.display="block";
+
 } else {
-    document.getElementById("SoKetNoi").style.display="none"
+
+    document.getElementById("SoKetNoi").style.display="none";
  } 
    
 }
@@ -239,7 +245,8 @@ function chonLoaiKhachHang() {
 
 // hàm tính tiền cáp
 function tinhPhiCap( phiHoaDon, phiDichVu, phiKenhCaoCap, soKenh){
-    return ( phiHoaDon + phiDichVu + phiKenhCaoCap*soKenh)
+
+        return ( phiHoaDon + phiDichVu + phiKenhCaoCap*soKenh)
 }
 
 // hàm chính
@@ -255,33 +262,43 @@ const THUE_KENH_CAO_CAP = 50
 
 function tinhTienCap(){
     var maKhachHang=document.getElementById("MaKhachHang").value;
+    
     var soKenhCaoCap = document.getElementById("KenhCaoCap").value;
+
     var soKetNoi =document.getElementById("SoKetNoi").value;
 
-    var tienCap = 0
+    var tienCap = 0;
+   
 
 
     switch (loaiKhachHang){
         default :
             alert ('Hãy chọn loại khách hàng')
             break;
+
         case "ND" :
             tienCap = tinhPhiCap(HOA_DON_NHA_DAN,DICH_VU_NHA_DAN,KENH_CAO_CAP_NHA_DAN,soKenhCaoCap);
             break;
+
         case "DN"  :
         if (soKetNoi >=0 && soKetNoi <=10) {
+
             tienCap = tinhPhiCap(HOA_DON_DOANH_NGHIEP,DICH_VU_DOANH_NGHIEP_10_KENH_DAU, THUE_KENH_CAO_CAP,soKenhCaoCap )
+
         } else if ( soKetNoi > 10 ) {
+
             tienCap = tinhPhiCap(HOA_DON_DOANH_NGHIEP,DICH_VU_DOANH_NGHIEP_10_KENH_DAU, THUE_KENH_CAO_CAP,soKenhCaoCap ) + ((soKetNoi-10)*DICH_VU_DOANH_NGHIEP_5_KENH_THEM)
+            
             break;
+
         } else {
             alert ('Vui lòng nhập số kết nối')
         }
     }
     
 
-document.getElementById("txtTienCap").innerHTML = " Mã khách hàng : " + maKhachHang + " ; Tiền cáp : " +  new Intl.NumberFormat('en-US',{ style: "currency", currency: "USD",  maximumFractionDigits: 2 }).format(tienCap);
+document.getElementById("txtTienCap").innerHTML = " Mã khách hàng : " + maKhachHang + " ; Tiền cáp : " +  new Intl.NumberFormat('en-US',{ style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(tienCap);
     
 }
 
-document.getElementById("btnTienCap").onclick= tinhTienCap;
+    document.getElementById("btnTienCap").onclick= tinhTienCap;
