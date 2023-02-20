@@ -256,6 +256,7 @@ document.getElementById("btnTienThue").onclick = tinhTienThue;
 var loaiKhachHang = " ";
 
 function chonLoaiKhachHang() {
+   
     loaiKhachHang = document.getElementById("LoaiKhachHang").value;
 
     if (loaiKhachHang == "DN") {
@@ -266,6 +267,7 @@ function chonLoaiKhachHang() {
 
         document.getElementById("SoKetNoi").style.display = "none";
     }
+   
 
 }
 
